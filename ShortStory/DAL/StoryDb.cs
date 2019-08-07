@@ -8,7 +8,7 @@ namespace DAL
 {
     public interface IStoryDb
     {
-        IEnumerable<Story> GetAll();
+        IQueryable<Story> GetAll();
 
         IEnumerable<Story> GetAll(bool IsApproved);
 
@@ -52,7 +52,7 @@ namespace DAL
             dbContext.SaveChanges();
         }
 
-        public IEnumerable<Story> GetAll()
+        public IQueryable<Story> GetAll()
         {
             return dbContext.Stories.ToList();
         }

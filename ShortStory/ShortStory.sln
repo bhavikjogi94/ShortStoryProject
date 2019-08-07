@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShortStoryBOL", "ShortStory
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{912E76D0-C207-453E-84FF-293D06EAA381}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShortStoryAPI", "ShortStoryAPI\ShortStoryAPI.csproj", "{0929674B-67C3-4AB2-AFE5-9E4FC9D71B22}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{912E76D0-C207-453E-84FF-293D06EAA381}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{912E76D0-C207-453E-84FF-293D06EAA381}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{912E76D0-C207-453E-84FF-293D06EAA381}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0929674B-67C3-4AB2-AFE5-9E4FC9D71B22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0929674B-67C3-4AB2-AFE5-9E4FC9D71B22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0929674B-67C3-4AB2-AFE5-9E4FC9D71B22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0929674B-67C3-4AB2-AFE5-9E4FC9D71B22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

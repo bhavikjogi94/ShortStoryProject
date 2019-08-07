@@ -7,3 +7,8 @@
 /ShortStory/.vs/ShortStory/v16/Server/sqlite3
 /ShortStory/DAL/bin/Debug/netcoreapp2.2
 /ShortStory/DAL/obj
+/ShortStory/ShortStoryAPI/bin/Debug/netcoreapp2.2
+/ShortStory/ShortStoryAPI/obj/Debug/netcoreapp2.2
+/ShortStory/ShortStoryAPI/obj
+/ShortStory/.vs/ShortStory/config
+/ShortStory/.vs/ShortStory/DesignTimeBuild
