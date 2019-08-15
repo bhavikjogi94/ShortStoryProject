@@ -54,7 +54,7 @@ namespace DAL
 
         public IQueryable<Story> GetAll()
         {
-            return dbContext.Stories.ToList();
+            return dbContext.Stories;
         }
 
         public IEnumerable<Story> GetAll(bool IsApproved)
