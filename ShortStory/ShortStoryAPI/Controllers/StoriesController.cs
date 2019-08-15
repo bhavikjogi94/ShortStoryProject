@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DAL;
 using ShortStoryBOL;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ShortStoryAPI.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class StoriesController : ControllerBase

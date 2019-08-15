@@ -6,7 +6,10 @@ using DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
+using ShortStoryBOL;
 
 namespace ShortStoryAPI
 {
@@ -16,12 +19,15 @@ namespace ShortStoryAPI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(x=>x.Filters.Add(new AuthorizeFilter()));
             services.AddDbContext<SSDbContext>();
             services.AddTransient<IStoryDb, StoryDb>();
             //  services.AddScoped<IStoryDb, StoryDb>();
             //services.AddSingleton<IStoryDb, StoryDb>();
             //services.AddResponseCaching();
+            services.AddIdentity<SSUser, IdentityRole>()
+                .AddEntityFrameworkStores<SSDbContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,6 +36,8 @@ namespace ShortStoryAPI
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
             //app.UseResponseCaching();
+
+            app.UseAuthentication();
             app.UseMvc();
         }
     }
