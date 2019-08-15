@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using ShortStoryAPI.ViewModel;
 using ShortStoryBOL;
 
@@ -83,7 +87,35 @@ namespace ShortStoryAPI.Controllers
                         var user = await userManager.FindByNameAsync(model.UserName);
                         var roles = await userManager.GetRolesAsync(user);
 
-                        return Ok();
+                        //Step 1 Creating Claims
+
+                        IdentityOptions identityOptions = new IdentityOptions();
+                        var claims = new Claim[]
+                        {
+                            new Claim("userId",user.Id),
+                            new Claim(identityOptions.ClaimsIdentity.UserIdClaimType,user.UserName),
+                            new Claim(identityOptions.ClaimsIdentity.RoleClaimType,roles[0])
+
+                        };
+
+                        //step 2 : Creating signinKey from Secret key
+                        var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this-is-my-secret-key"));
+
+                        //step 3 : Create signingCredentials from signinkey with HMAC algorithm
+                         var signingCredentials = new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256);
+
+                        //Step 4: Creating JW with signingCredentials, identityClaims & expire duration
+
+                        var jwt = new JwtSecurityToken(signingCredentials: signingCredentials, expires: DateTime.Now.AddSeconds(30), claims: claims);
+
+                        //step 5: Write token as response with Ok()
+                        return Ok( new
+                        {
+                            tokenJwt =new JwtSecurityTokenHandler().WriteToken(jwt),
+                            id =user.Id,
+                            userName=user.UserName,
+                            role=roles[0]
+                        });
                     }
                     else
                     {
@@ -99,6 +131,11 @@ namespace ShortStoryAPI.Controllers
             }
         }
 
-
+        [HttpPost("signout")]
+        public async Task<IActionResult> SignOut(SignInViewModel model)
+        {
+            await signInManager.SignOutAsync();
+            return NoContent();
+        }
     }
 }
